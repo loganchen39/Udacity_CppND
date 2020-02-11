@@ -1,0 +1,23 @@
+Determining if the function cbreak exists in the /opt/conda/lib/libncurses.so failed with the following output:
+Change Dir: /home/workspace/CppND-System-Monitor/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d72b0/fast"
+make[1]: Entering directory '/home/workspace/CppND-System-Monitor/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_d72b0.dir/build.make CMakeFiles/cmTC_d72b0.dir/build
+make[2]: Entering directory '/home/workspace/CppND-System-Monitor/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d72b0.dir/CheckFunctionExists.c.o
+/opt/conda/bin/cc    -DCHECK_FUNCTION_EXISTS=cbreak   -o CMakeFiles/cmTC_d72b0.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d72b0
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d72b0.dir/link.txt --verbose=1
+/opt/conda/bin/cc   -DCHECK_FUNCTION_EXISTS=cbreak    CMakeFiles/cmTC_d72b0.dir/CheckFunctionExists.c.o  -o cmTC_d72b0 -rdynamic /opt/conda/lib/libncurses.so 
+/usr/bin/ld: CMakeFiles/cmTC_d72b0.dir/CheckFunctionExists.c.o: undefined reference to symbol 'cbreak@@NCURSES_TINFO_5.0.19991023'
+//lib/x86_64-linux-gnu/libtinfo.so.5: error adding symbols: DSO missing from command line
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d72b0.dir/build.make:98: recipe for target 'cmTC_d72b0' failed
+make[2]: *** [cmTC_d72b0] Error 1
+make[2]: Leaving directory '/home/workspace/CppND-System-Monitor/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_d72b0/fast' failed
+make[1]: *** [cmTC_d72b0/fast] Error 2
+make[1]: Leaving directory '/home/workspace/CppND-System-Monitor/build/CMakeFiles/CMakeTmp'
+
+
