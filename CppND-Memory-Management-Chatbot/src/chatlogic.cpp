@@ -254,13 +254,19 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
   
     //Ligang: Task 5
-    std::unique_ptr<ChatBot> pChatBot(new ChatBot("../images/chatbot.png"));
-    _chatBot = pChatBot.get();  // in the video the insturctor says "replace" and remain, so not add a new instance!
+    // std::unique_ptr<ChatBot> pChatBot(new ChatBot("../images/chatbot.png"));
+    // _chatBot = pChatBot.get();  // in the video the insturctor says "replace" and remain, so not add a new instance!
 
+    ChatBot chatBot("../images/chatbot.png");
+    //if (_chatBot != nullptr)
+    //    delete _chatBot; 
+    _chatBot = &chatBot; 
     // add chatbot to graph root node
-    _chatBot->SetRootNode(rootNode);
     _chatBot->SetChatLogicHandle(this);  //do not forget, copied from constructor.
-    rootNode->MoveChatbotHere(std::move(pChatBot));  // need to be at last, pChatBot then can be seen as invalid!
+    _chatBot->SetRootNode(rootNode);
+   
+    // Ligang: move constructor, not copy constructor to construct the ChatBot instance.
+    rootNode->MoveChatbotHere(std::move(chatBot));  
     
     ////
     //// EOF STUDENT CODE

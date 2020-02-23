@@ -27,8 +27,8 @@ private:
     std::vector<GraphEdge *> _parentEdges;  
     
     // ChatBot *_chatBot;  // changed to unique_ptr for ownership declaration. 
-    std::unique_ptr<ChatBot> _chatBot; 
-    // std::unique_ptr<ChatBot> _uniquePtrChatBot;  // the insturctor says "replace", so not another instance.
+    // std::unique_ptr<ChatBot> _chatBot; 
+    ChatBot _chatBot;
 
     ////
     //// EOF STUDENT CODE
@@ -59,7 +59,8 @@ public:
     ////
 
     // void MoveChatbotHere(ChatBot *chatbot); 
-    void MoveChatbotHere(std::unique_ptr<ChatBot> pChatbot);
+    // void MoveChatbotHere(std::unique_ptr<ChatBot> pChatbot); 1st submission
+    void MoveChatbotHere(ChatBot chatbot);
 
     ////
     //// EOF STUDENT CODE

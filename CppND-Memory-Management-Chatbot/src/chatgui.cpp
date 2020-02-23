@@ -119,8 +119,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     //// STUDENT CODE
     ////
 
-    // Ligang: create chat logic instance, it also works, you can initialize and assign
-    // a unique_ptr like this!
+    // Ligang: create chat logic instance, it also works, you can initialize and assign a unique_ptr like this!
     // _chatLogic = std::make_unique<ChatLogic>();
       
     // pass pointer to chatbot dialog so answers can be displayed in GUI

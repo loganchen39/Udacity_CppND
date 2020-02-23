@@ -51,9 +51,17 @@ ChatBot::ChatBot(const ChatBot& other)
 {
     std::cout << "ChatBot copy constructor" << std::endl;
   
-    _image = new wxBitmap(*other._image);
-    _chatLogic = nullptr;  // do they need to copy from "other", and then point to the same heap memory of ChatLogic object?
-    _rootNode  = nullptr;
+    //_image = new wxBitmap(*other._image);
+    //_chatLogic = nullptr;  // do they need to copy from "other", and then point to the same heap memory of ChatLogic object?
+    //_rootNode  = nullptr;
+  
+    _rootNode    = other._rootNode;
+    _currentNode = other._currentNode;
+    _chatLogic   = other._chatLogic; 
+    _chatLogic->SetChatbotHandle(this); 
+  
+    _image  = new wxBitmap();
+    *_image = *other._image;
 }
 
 
@@ -62,27 +70,37 @@ ChatBot& ChatBot::operator=(const ChatBot& other)
 {
     std::cout << "ChatBot copy assignment operator" << std::endl;
   
-    if (this != &other) {
+    if (this == &other)
+        return *this; 
+    
+    _rootNode    = other._rootNode;
+    _currentNode = other._currentNode;
+    _chatLogic   = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    
+    if (_image != nullptr)
         delete _image;
-        _image = new wxBitmap(*(other._image)); 
-      
-        _chatLogic = nullptr;
-        _rootNode  = nullptr;
-    }
+    _image = new wxBitmap(*(other._image));
   
     return *this; 
 }
 
 
 // move constructor
-ChatBot::ChatBot(ChatBot&& other) : _image(other._image)
+ChatBot::ChatBot(ChatBot&& other)
 {
     std::cout << "ChatBot move constructor" << std::endl;
   
-    other._image = nullptr;
+    _rootNode          = other._rootNode;
+    other._rootNode    = nullptr; 
+    _currentNode       = other._currentNode;
+    other._currentNode = nullptr;
+    _chatLogic         = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    other._chatLogic   = nullptr;
   
-    _chatLogic = nullptr;
-    _rootNode  = nullptr;
+    _image       = other._image; 
+    other._image = nullptr;
 }
 
 
@@ -91,15 +109,22 @@ ChatBot& ChatBot::operator=(ChatBot&& other)
 {
     std::cout << "ChatBot move assignment operator" << std::endl; 
   
-    if (this != &other) {
-        delete _image;
-        _image = other._image;
-        other._image = nullptr;
+    if (this == &other)
+        return *this; 
+    
+    _rootNode  = other._rootNode;
+    other._rootNode = nullptr;
+    _currentNode = other._currentNode;
+    other._currentNode = nullptr;
+    _chatLogic = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    other._chatLogic = nullptr;
         
-        _chatLogic = nullptr;
-        _rootNode  = nullptr;
-    }
-  
+    if (_image != nullptr)
+        delete _image;
+    _image = other._image;
+    other._image = nullptr;
+        
     return *this;
 }
 

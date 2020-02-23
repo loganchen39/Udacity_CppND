@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "graphedge.h"
 #include "graphnode.h"
 
@@ -54,11 +56,28 @@ void GraphNode::MoveChatbotHere(ChatBot *chatbot)
 }
 */
 
+/** 1st submission
 void GraphNode::MoveChatbotHere(std::unique_ptr<ChatBot> chatbot)
 {
     // transfer ownership, which means responsibility (for releasing memory and resources).
     _chatBot = std::move(chatbot);  
     _chatBot->SetCurrentNode(this);
+}
+*/
+
+void GraphNode::MoveChatbotHere(ChatBot chatbot)
+{
+    // std::cout << "Entering function GraphNode::MoveChatbotHere() ..." << std::endl;
+  
+    // transfer ownership, which means responsibility (for releasing memory and resources).
+    ChatBot tmp_chatbot = std::move(chatbot);
+    _chatBot = std::move(tmp_chatbot);
+    // _chatBot = std::move(chatbot);  // Ligang: ?
+    // _chatBot = std::make_unique<ChatBot>(std::move(chatbot));  // Ligang: ?
+  
+    _chatBot.SetCurrentNode(this);
+  
+    // std::cout << "Leaving function GraphNode::MoveChatbotHere() ..." << std::endl; 
 }
 
 /** Ligang: 
@@ -72,8 +91,10 @@ void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
     // See task 5 video, transfer ownership / responsibility of ChatBot instance among nodes.
-    newNode->MoveChatbotHere(std::move(_chatBot));
-    _chatBot = nullptr; // invalidate pointer at source
+    // newNode->MoveChatbotHere(std::move(*_chatBot));
+    newNode->MoveChatbotHere(_chatBot);
+  
+    //_chatBot = nullptr; // invalidate pointer at source, do not do like this.
 }
 
 ////
