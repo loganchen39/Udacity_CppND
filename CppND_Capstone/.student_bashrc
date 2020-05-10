@@ -1,0 +1,6 @@
+sudo apt-get -y update
+# sudo apt-get -y install libsdl2-dev
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/conda/lib
+export LIBRARY_PATH=$LIBRARY_PATH:/opt/conda/lib
+
+
